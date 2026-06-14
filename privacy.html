@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — AttendEase</title>
+  <meta name="description" content="Privacy Policy for AttendEase (com.attendease.bunksmart). Learn how we collect, use, and protect your data.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+  <!-- Noise texture overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Decorative blur blobs -->
+  <div class="blob-1"></div>
+  <div class="blob-2"></div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <img src="../assets/images/icon.png" alt="AttendEase Logo" onerror="this.src='https://placehold.co/80x80/6C63FF/FFF?text=AE'">
+        <div style="display: flex; flex-direction: column;">
+          <span class="logo-text">AttendEase</span>
+          <span class="logo-tagline">your semester, sorted</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#demo">Interactive Simulator</a></li>
+        <li><a href="privacy.html" style="color: var(--color-primary);">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-outline">
+          <span class="material-symbols-outlined">arrow_back</span> Back to Home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Section -->
+  <main class="info-page">
+    <div class="info-header">
+      <h1>Privacy Policy</h1>
+      <div class="info-meta">Effective Date: 14 June 2026 &nbsp;|&nbsp; Last Updated: 14 June 2026</div>
+    </div>
+
+    <article class="info-content">
+      <section>
+        <h2>1. Introduction</h2>
+        <p>This Privacy Policy describes how <b>AttendEase</b> (Android package name: <b>com.attendease.bunksmart</b>, referred to as "the App", "we", "us", or "our") collects, uses, shares, and protects information when you use the App. This policy applies to all users of AttendEase.</p>
+        <p>By installing or using AttendEase, you acknowledge that you have read and understood this Privacy Policy and agree to its terms. If you do not agree, please uninstall the App immediately.</p>
+        <p><b>Developer:</b> Harda Josh &nbsp;|&nbsp; <b>Contact:</b> <a href="mailto:waytokairo@gmail.com">waytokairo@gmail.com</a></p>
+      </section>
+
+      <section>
+        <h2>2. Information We Collect</h2>
+        <p>AttendEase is designed as a <b>local-first, offline-first</b> application. The vast majority of your data stays entirely on your device and is never transmitted to any server. Below is an honest and exhaustive breakdown of all data the App handles:</p>
+
+        <div class="highlight-box">
+          <p><b>A. Data Stored Locally on Your Device Only (NEVER sent to our servers):</b></p>
+          <ul style="margin-top: 8px;">
+            <li><b>Attendance Records:</b> Your daily attendance logs for each subject (Present, Absent, Late, Cancelled status).</li>
+            <li><b>Timetable & Schedule:</b> Class schedules, time slots, day-of-week mappings, and subject configurations.</li>
+            <li><b>Classroom Coordinates:</b> The geographic latitude, longitude, and radius boundaries you configure for auto-marking. These GPS coordinates are stored in a local SQLite database and are <b>never</b> uploaded, transmitted, or shared.</li>
+            <li><b>Assignments:</b> Due dates, titles, weightage, and completion status.</li>
+            <li><b>Holidays:</b> Custom holidays, college events, and leave entries.</li>
+            <li><b>App Preferences:</b> Theme selection, notification preferences, and local settings.</li>
+          </ul>
+          <p style="margin-top: 10px; font-size: 13px; color: var(--color-text-secondary);"><b>Important:</b> We have zero access to any of this data. It exists solely on your physical device. Uninstalling the App or clearing app storage permanently deletes this data, and we cannot recover it.</p>
+        </div>
+
+        <div class="highlight-box">
+          <p><b>B. Data Transmitted to Our Servers (Only if you voluntarily create an account and enable Cloud Sync):</b></p>
+          <p style="margin-top: 6px; font-size: 13px;">Cloud Sync is an <b>opt-in</b> feature available to Pro subscribers. If you choose not to sign up or not to enable sync, <b>none</b> of the data below is ever collected.</p>
+          <ul style="margin-top: 8px;">
+            <li><b>Email Address:</b> Collected during account creation for authentication purposes only. We use Supabase Auth and/or Google Sign-In. We do not send you marketing emails.</li>
+            <li><b>Display Name &amp; Avatar Emoji:</b> Your chosen profile name and avatar character, used to identify you within Social Squads.</li>
+            <li><b>Aggregate Attendance Percentage:</b> Your overall attendance percentage (a single number), shared only with members of squads you voluntarily join.</li>
+            <li><b>Squad Membership Data:</b> Squad IDs, invite codes, and member rosters for groups you create or join.</li>
+            <li><b>Subscription Status:</b> Your Pro plan type, purchase date, and expiry date (managed via RevenueCat and stored in our database to validate your entitlements).</li>
+          </ul>
+          <p style="margin-top: 10px; font-size: 13px; color: var(--color-text-secondary);"><b>If you enable full Cloud Sync (Pro only):</b> Your semester data, subjects, time slots, attendance records, holidays, assignments, exams, and campus location names are backed up to our Supabase database so you can restore them across devices. This data is encrypted in transit (TLS) and stored securely. <b>We do not view, analyze, sell, or use your synced academic data for any purpose other than providing the backup/sync service to you.</b></p>
+        </div>
+
+        <div class="highlight-box">
+          <p><b>C. Data Collected Automatically by Third-Party SDKs:</b></p>
+          <ul style="margin-top: 8px;">
+            <li><b>Google AdMob:</b> May collect device advertising identifiers, IP address, device model, OS version, and general (non-precise) location to serve ads. This applies to free-tier users only.</li>
+            <li><b>RevenueCat:</b> Collects anonymous purchase transaction data and billing identifiers to manage subscriptions.</li>
+            <li><b>Google Sign-In:</b> If you choose to sign in with Google, we receive your Google account name, email, and profile photo URL.</li>
+          </ul>
+          <p style="margin-top: 10px; font-size: 13px; color: var(--color-text-secondary);">We do not have direct control over data collected by these third-party SDKs. Please review their respective privacy policies linked in Section 5.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. How We Use Your Information</h2>
+        <p>We use the collected information strictly for the following purposes:</p>
+        <ul>
+          <li><b>Providing App Functionality:</b> To deliver attendance tracking, bunk budget calculations, timetable management, and auto-marking features.</li>
+          <li><b>Account Authentication:</b> To verify your identity when you sign in via email/password or Google Sign-In.</li>
+          <li><b>Cloud Sync &amp; Backup:</b> To back up and restore your academic data across devices (Pro subscribers who opt in).</li>
+          <li><b>Social Squads:</b> To allow you and your friends to share attendance percentages within voluntarily joined groups.</li>
+          <li><b>Subscription Management:</b> To verify your Pro subscription status and entitlements.</li>
+          <li><b>Serving Advertisements:</b> To display ads to free-tier users via Google AdMob.</li>
+        </ul>
+        <p><b>We do NOT use your data for:</b> Profiling, behavioral targeting, selling to third parties, data mining, training AI models, or any purpose not directly related to the App's stated functionality.</p>
+      </section>
+
+      <section>
+        <h2>4. Prominent Disclosure: Background Location Access</h2>
+        <p>AttendEase requests background location access (<code>ACCESS_FINE_LOCATION</code>, <code>ACCESS_COARSE_LOCATION</code>, <code>ACCESS_BACKGROUND_LOCATION</code>) for the <b>Proximity Auto-Marking</b> feature. This section serves as the required prominent disclosure per Google Play policy.</p>
+
+        <div class="highlight-box">
+          <p><b>Purpose:</b> When you enable auto-marking, the App monitors your device's location in the background to detect whether you are within a classroom perimeter you have pre-configured, during a scheduled class time. If you are, the App automatically marks your attendance as "Present".</p>
+        </div>
+
+        <div class="highlight-box">
+          <p><b>Key Facts About Location Data Processing:</b></p>
+          <ul style="margin-top: 8px;">
+            <li>Location coordinates are processed <b>entirely on your device</b> within background tasks. They are <b>never transmitted to our servers</b> or any third-party service.</li>
+            <li>Location data is <b>never combined</b> with advertising identifiers, analytics tools, or user profiles.</li>
+            <li>Location data is <b>never sold, shared, or disclosed</b> to any third party.</li>
+            <li>Background location access is <b>disabled by default</b>. You must explicitly enable it through the App's settings.</li>
+            <li>You can <b>revoke</b> background location permission at any time through your device's system settings (Settings → Apps → AttendEase → Permissions → Location).</li>
+            <li>Even classroom coordinates (lat/lng/radius) that you save are stored <b>only in your local SQLite database</b>. If Cloud Sync is enabled, only the location name (e.g., "Room 201") is synced — not GPS coordinates.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. Third-Party Services &amp; SDKs</h2>
+        <p>The App integrates the following third-party services. Each has its own privacy policy governing how they collect and process data:</p>
+        <ul>
+          <li><b>Google Mobile Ads (AdMob)</b> — Ad serving for free users. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+          <li><b>RevenueCat</b> — Subscription and purchase management. <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">RevenueCat Privacy Policy</a></li>
+          <li><b>Google Sign-In</b> — OAuth authentication. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+          <li><b>Supabase</b> — Cloud database and authentication backend. <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase Privacy Policy</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>6. Data Sharing</h2>
+        <p>We do <b>not</b> sell, rent, or trade your personal data to any third party. We share data only in the following limited circumstances:</p>
+        <ul>
+          <li><b>Social Squads (User-Initiated):</b> If you voluntarily join a squad, your display name, avatar, and aggregate attendance percentage are visible to other squad members.</li>
+          <li><b>Third-Party SDKs:</b> As described in Section 5, certain SDKs may collect device-level data independently. We do not control or have access to this data.</li>
+          <li><b>Legal Requirements:</b> We may disclose information if required by law, regulation, or legal process.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>7. Data Security</h2>
+        <p>We implement reasonable security measures to protect your data:</p>
+        <ul>
+          <li>All data in transit between the App and our cloud servers is encrypted using <b>TLS (HTTPS)</b>.</li>
+          <li>Cloud data is stored on <b>Supabase</b>, which uses enterprise-grade PostgreSQL with row-level security (RLS) policies ensuring users can only access their own data.</li>
+          <li>Local data is stored in an on-device SQLite database.</li>
+          <li>Authentication tokens are stored using <b>expo-secure-store</b>, which utilizes the device's secure keychain/keystore.</li>
+        </ul>
+        <p>No method of electronic storage is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</p>
+      </section>
+
+      <section>
+        <h2>8. Data Retention &amp; Deletion</h2>
+        <p>You have full control over your data:</p>
+        <ul>
+          <li><b>Local Data:</b> Stored on your device until you clear app storage or uninstall the App. We have no access to it and cannot recover it once deleted.</li>
+          <li><b>Cloud Data:</b> If you created an account and enabled sync, your data is retained on our servers until you request deletion. You can request deletion by:
+            <ul style="margin-top: 6px;">
+              <li>Using the in-app account deletion option in Settings, or</li>
+              <li>Emailing us at <a href="mailto:waytokairo@gmail.com">waytokairo@gmail.com</a> with your account email.</li>
+            </ul>
+          </li>
+          <li>Upon receiving a deletion request, all cloud data (profile, attendance records, subjects, squads, subscriptions) will be <b>permanently deleted within 30 days</b>.</li>
+          <li><b>Subscription Data:</b> RevenueCat may retain anonymous purchase records as required by app store policies and financial regulations.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>9. Children's Privacy</h2>
+        <p>AttendEase is designed for <b>high school and university/college students</b>. The App does <b>not</b> target, market to, or knowingly collect personally identifiable information from children under the age of 13 (or the applicable age in your jurisdiction).</p>
+        <p>If you are a parent or guardian and believe that your child under 13 has provided personal data through the App's cloud sync feature, please contact us immediately at <a href="mailto:waytokairo@gmail.com">waytokairo@gmail.com</a>. We will promptly investigate and delete such data from our servers.</p>
+      </section>
+
+      <section>
+        <h2>10. Your Rights</h2>
+        <p>Depending on your jurisdiction, you may have the following rights regarding your personal data:</p>
+        <ul>
+          <li><b>Access:</b> Request a copy of the personal data we hold about you.</li>
+          <li><b>Correction:</b> Request correction of inaccurate data.</li>
+          <li><b>Deletion:</b> Request deletion of your data (see Section 8).</li>
+          <li><b>Portability:</b> Request your data in a portable format.</li>
+          <li><b>Objection:</b> Object to certain processing of your data.</li>
+        </ul>
+        <p>To exercise any of these rights, contact us at <a href="mailto:waytokairo@gmail.com">waytokairo@gmail.com</a>.</p>
+      </section>
+
+      <section>
+        <h2>11. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in the App, legal requirements, or Google Play Developer Program policies. When we make material changes, we will update the "Last Updated" date at the top of this page. We encourage you to review this page periodically.</p>
+        <p>Your continued use of the App after any changes constitutes acceptance of the updated Privacy Policy.</p>
+      </section>
+
+      <section>
+        <h2>12. Contact Us</h2>
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+        <div class="highlight-box">
+          <p><b>Email:</b> <a href="mailto:waytokairo@gmail.com">waytokairo@gmail.com</a></p>
+          <p><b>Developer:</b> Harda Josh</p>
+          <p><b>App Name:</b> AttendEase</p>
+          <p><b>Package Name:</b> com.attendease.bunksmart</p>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="logo-text">AttendEase</span>
+        <p>An offline-first attendance tracker designed for college students. Track attendance, plan bunks, manage grades, and sync with friends.</p>
+      </div>
+      <div class="footer-links-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#demo">Interactive Simulator</a></li>
+          <li><a href="index.html#pricing">Pro vs Free</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h5>Contact</h5>
+        <div style="font-size: 14px; color: var(--color-text-secondary);">
+          <a href="mailto:waytokairo@gmail.com" style="color: var(--color-primary);">waytokairo@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 AttendEase by Harda Josh. All rights reserved.</span>
+    </div>
+  </footer>
+</body>
+</html>

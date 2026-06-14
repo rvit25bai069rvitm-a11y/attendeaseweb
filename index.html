@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AttendEase — Your Semester, Sorted</title>
+  <meta name="description" content="Maintain your college attendance zone dynamically, plan your GPA, calculate skip-budgets, and auto-mark attendance when you enter classrooms.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Material Symbols Outlined (for UI icons) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+</head>
+<body>
+  <!-- Noise texture overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Decorative blur blobs -->
+  <div class="blob-1"></div>
+  <div class="blob-2"></div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo-link">
+        <!-- We use a placeholder image structure but reference local files so the user has the asset links -->
+        <img src="../assets/images/icon.png" alt="AttendEase Logo" onerror="this.src='https://placehold.co/80x80/6C63FF/FFF?text=AE'">
+        <div style="display: flex; flex-direction: column;">
+          <span class="logo-text">AttendEase</span>
+          <span class="logo-tagline">your semester, sorted</span>
+        </div>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#demo">Interactive Simulator</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-toggle-theme" id="themeToggle" aria-label="Toggle Light/Dark Theme">
+          <span class="material-symbols-outlined" id="themeIcon">light_mode</span>
+        </button>
+        <a href="#download" class="btn-primary">
+          <span class="material-symbols-outlined">download</span> Download App
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="background-grid"></div>
+    <div class="hero-content">
+      <div class="badge-tag">
+        <span class="material-symbols-outlined" style="font-size: 16px;">verified</span> Over 10,000+ Students Sorted
+      </div>
+      <h1 class="hero-title">
+        Skip smarter,<br><span>not harder.</span>
+      </h1>
+      <p class="hero-description">
+        AttendEase is the local-first assistant built for college life. Track subjects, calculate bunk budgets, and auto-mark attendance via background location. 
+      </p>
+      
+      <div class="hero-cta" id="download">
+        <a href="#" class="store-badge">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M17.5,12A5.5,5.5 0 0,0 12,6.5A5.5,5.5 0 0,0 6.5,12A5.5,5.5 0 0,0 12,17.5A5.5,5.5 0 0,0 17.5,12M12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5Z"/>
+          </svg>
+          <div class="badge-info">
+            <span>Download for</span>
+            <span>Android (APK)</span>
+          </div>
+        </a>
+        <a href="#demo" class="btn-outline">
+          <span class="material-symbols-outlined">play_arrow</span> Try Simulator
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">83%</span>
+          <span class="stat-label">Average Attendance</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Privacy Stored Locally</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone Showcase Frame -->
+    <div class="hero-showcase">
+      <!-- Floating decorative elements -->
+      <div class="floating-card card-left">
+        <div class="floating-icon">
+          <span class="material-symbols-outlined">schedule</span>
+        </div>
+        <div>
+          <div class="floating-card-title">DBMS Budget</div>
+          <div class="floating-card-value">2 Left to Bunk</div>
+        </div>
+      </div>
+
+      <div class="floating-card card-right">
+        <div class="floating-icon" style="color: var(--color-accent-green); background: rgba(29, 209, 161, 0.15);">
+          <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <div>
+          <div class="floating-card-title">Marked Auto</div>
+          <div class="floating-card-value">Present ✓</div>
+        </div>
+      </div>
+
+      <!-- App Device Simulator -->
+      <div class="device-wrapper">
+        <div class="device-glare"></div>
+        <div class="device-screen">
+          <!-- Notification Toast inside App -->
+          <div class="app-toast" id="appToast">✓ Attendance updated! Safe Zone Recalculated.</div>
+
+          <!-- App Top Bar -->
+          <div class="app-header">
+            <div class="app-user-row">
+              <div class="app-avatar">A</div>
+              <div>
+                <div class="app-greeting-label" id="appGreeting">Good morning,</div>
+                <div class="app-greeting-name">Arjun 👋</div>
+              </div>
+            </div>
+            <div class="app-bell">
+              <span class="material-symbols-outlined" style="font-size: 16px;">notifications</span>
+            </div>
+          </div>
+
+          <!-- TAB 1: HOME SCREEN -->
+          <div class="app-content-area active" id="appHome">
+            <div class="app-hero-card">
+              <div class="app-hero-label">Overall Attendance</div>
+              <div class="app-hero-percentage" id="overallPct">83%</div>
+              <div class="app-status-chip">Safe Zone ✓</div>
+              <div class="app-hero-stats-row">
+                <span>47 Classes Done</span>
+                <span>8 Bunked</span>
+              </div>
+            </div>
+
+            <div class="app-section-title">
+              <span>Today's Classes</span>
+              <span class="app-section-date">Fri, 12 Jun</span>
+            </div>
+
+            <div class="app-class-list">
+              <!-- Class Card 1 -->
+              <div class="app-class-card" style="--subj-color: var(--color-primary);">
+                <div class="app-class-info">
+                  <div class="app-class-code">DS</div>
+                  <div class="app-class-name">Data Structures</div>
+                  <div class="app-class-time">09:00 AM - 10:00 AM</div>
+                </div>
+                <div class="app-btn-group">
+                  <button class="app-mark-btn btn-p" onclick="markAttendance(this, 'present', 1)">P</button>
+                  <button class="app-mark-btn btn-l" onclick="markAttendance(this, 'late', 0.5)">L</button>
+                  <button class="app-mark-btn btn-a" onclick="markAttendance(this, 'absent', 0)">A</button>
+                </div>
+              </div>
+
+              <!-- Class Card 2 -->
+              <div class="app-class-card" style="--subj-color: var(--color-accent);">
+                <div class="app-class-info">
+                  <div class="app-class-code">DBMS</div>
+                  <div class="app-class-name">Database Systems</div>
+                  <div class="app-class-time">10:15 AM - 11:15 AM</div>
+                </div>
+                <div class="app-btn-group">
+                  <button class="app-mark-btn btn-p" onclick="markAttendance(this, 'present', 1)">P</button>
+                  <button class="app-mark-btn btn-l" onclick="markAttendance(this, 'late', 0.5)">L</button>
+                  <button class="app-mark-btn btn-a" onclick="markAttendance(this, 'absent', 0)">A</button>
+                </div>
+              </div>
+
+              <!-- Class Card 3 -->
+              <div class="app-class-card" style="--subj-color: var(--color-accent-green);">
+                <div class="app-class-info">
+                  <div class="app-class-code">OS</div>
+                  <div class="app-class-name">Operating Systems</div>
+                  <div class="app-class-time">11:30 AM - 12:30 PM</div>
+                </div>
+                <div class="app-btn-group">
+                  <button class="app-mark-btn btn-p" onclick="markAttendance(this, 'present', 1)">P</button>
+                  <button class="app-mark-btn btn-l" onclick="markAttendance(this, 'late', 0.5)">L</button>
+                  <button class="app-mark-btn btn-a" onclick="markAttendance(this, 'absent', 0)">A</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: DASHBOARD -->
+          <div class="app-content-area" id="appDashboard">
+            <div class="app-stat-cards">
+              <div class="app-stat-card">
+                <div class="app-stat-val" style="color: var(--color-accent-green);">83.2%</div>
+                <div class="app-stat-lbl">Overall</div>
+              </div>
+              <div class="app-stat-card">
+                <div class="app-stat-val" style="color: var(--color-accent-blue);">6 / 6</div>
+                <div class="app-stat-lbl">Safe</div>
+              </div>
+              <div class="app-stat-card">
+                <div class="app-stat-val" style="color: var(--color-accent);">8</div>
+                <div class="app-stat-lbl">Bunks</div>
+              </div>
+            </div>
+
+            <div class="app-section-title">Per-Subject Status</div>
+
+            <!-- Subject Card 1 -->
+            <div class="app-subject-card">
+              <div class="app-subject-header">
+                <div class="app-subject-details">
+                  <span class="app-subject-name">Data Structures</span>
+                  <span class="app-subject-teacher">Prof. Sharma</span>
+                </div>
+                <span class="app-subject-pct">85%</span>
+              </div>
+              <div class="app-progress-bar-wrapper">
+                <div class="app-progress-bar-fill" style="width: 85%;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:9px; color:#9B9BBF;">
+                <span>17/20 Classes</span>
+                <span style="color: var(--color-accent-green);">Safe to Bunk: 2</span>
+              </div>
+            </div>
+
+            <!-- Subject Card 2 -->
+            <div class="app-subject-card">
+              <div class="app-subject-header">
+                <div class="app-subject-details">
+                  <span class="app-subject-name">Database Systems</span>
+                  <span class="app-subject-teacher">Dr. Verma</span>
+                </div>
+                <span class="app-subject-pct" style="color: var(--color-accent-warm);">76%</span>
+              </div>
+              <div class="app-progress-bar-wrapper">
+                <div class="app-progress-bar-fill" style="width: 76%; background: var(--color-accent-warm);"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:9px; color:#9B9BBF;">
+                <span>13/17 Classes</span>
+                <span style="color: var(--color-accent);">Must Attend Next: 1</span>
+              </div>
+            </div>
+
+            <!-- Subject Card 3 -->
+            <div class="app-subject-card">
+              <div class="app-subject-header">
+                <div class="app-subject-details">
+                  <span class="app-subject-name">Operating Systems</span>
+                  <span class="app-subject-teacher">Prof. Nair</span>
+                </div>
+                <span class="app-subject-pct">88%</span>
+              </div>
+              <div class="app-progress-bar-wrapper">
+                <div class="app-progress-bar-fill" style="width: 88%; background: var(--color-accent-green);"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:9px; color:#9B9BBF;">
+                <span>15/17 Classes</span>
+                <span style="color: var(--color-accent-green);">Safe to Bunk: 3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: CALENDAR -->
+          <div class="app-content-area" id="appCalendar">
+            <div class="app-calendar-header">
+              <span class="app-calendar-month">June 2026</span>
+              <div style="display:flex; gap:8px; color: #EEEEF5;">
+                <span class="material-symbols-outlined" style="font-size:16px; cursor:pointer;">chevron_left</span>
+                <span class="material-symbols-outlined" style="font-size:16px; cursor:pointer;">chevron_right</span>
+              </div>
+            </div>
+
+            <div class="app-calendar-grid">
+              <!-- Headers -->
+              <span class="app-calendar-day-label">M</span>
+              <span class="app-calendar-day-label">T</span>
+              <span class="app-calendar-day-label">W</span>
+              <span class="app-calendar-day-label">T</span>
+              <span class="app-calendar-day-label">F</span>
+              <span class="app-calendar-day-label">S</span>
+              <span class="app-calendar-day-label">S</span>
+
+              <!-- Dates -->
+              <span class="app-calendar-cell text-muted">25</span>
+              <span class="app-calendar-cell text-muted">26</span>
+              <span class="app-calendar-cell text-muted">27</span>
+              <span class="app-calendar-cell text-muted">28</span>
+              <span class="app-calendar-cell text-muted">29</span>
+              <span class="app-calendar-cell text-muted">30</span>
+              <span class="app-calendar-cell has-dots">1</span>
+              
+              <span class="app-calendar-cell has-dots">2</span>
+              <span class="app-calendar-cell has-dots">3</span>
+              <span class="app-calendar-cell has-dots">4</span>
+              <span class="app-calendar-cell has-dots">5</span>
+              <span class="app-calendar-cell has-dots">6</span>
+              <span class="app-calendar-cell">7</span>
+              <span class="app-calendar-cell">8</span>
+
+              <span class="app-calendar-cell has-dots">9</span>
+              <span class="app-calendar-cell has-dots">10</span>
+              <span class="app-calendar-cell has-dots">11</span>
+              <span class="app-calendar-cell today active">12</span>
+              <span class="app-calendar-cell">13</span>
+              <span class="app-calendar-cell">14</span>
+              <span class="app-calendar-cell">15</span>
+              
+              <span class="app-calendar-cell">16</span>
+              <span class="app-calendar-cell">17</span>
+              <span class="app-calendar-cell">18</span>
+              <span class="app-calendar-cell">19</span>
+              <span class="app-calendar-cell">20</span>
+              <span class="app-calendar-cell">21</span>
+              <span class="app-calendar-cell">22</span>
+            </div>
+
+            <div style="margin-top:20px; background:#1C1B2E; padding:12px; border-radius:12px; border:1px solid #2E2D47;">
+              <div style="font-size:11px; font-weight:700; color:#EEEEF5; margin-bottom:8px;">Schedule Details (Today)</div>
+              <div style="display:flex; flex-direction:column; gap:6px; font-size:10px; color:#9B9BBF;">
+                <div style="display:flex; justify-content:space-between;">
+                  <span>09:00 - Data Structures</span>
+                  <span style="color: var(--color-accent-green);">Marked Present ✓</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                  <span>10:15 - Database Systems</span>
+                  <span style="color: var(--color-accent);">Marked Absent ✗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: SQUAD -->
+          <div class="app-content-area" id="appSquad">
+            <div style="background:#1C1B2E; border:1px solid #2E2D47; border-radius:14px; padding:12px; margin-bottom:12px; text-align:center;">
+              <div style="font-size:10px; text-transform:uppercase; color:#9B9BBF;">Active Squad</div>
+              <div style="font-size:14px; font-weight:700; color:#EEEEF5; margin-top:2px; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <span>CS Batch 2026 🔥</span>
+              </div>
+              <div style="font-size:9px; color:var(--color-primary); background:rgba(108, 99, 255, 0.15); padding:4px 8px; border-radius:100px; display:inline-block; margin-top:6px; font-weight:700; font-family:'Space Grotesk', sans-serif;">
+                Code: CS26-F9X2
+              </div>
+            </div>
+
+            <div class="app-section-title">Members (5/8)</div>
+            
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <!-- Member 1 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#1C1B2E; border:1px solid #2E2D47; border-radius:12px; padding:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="font-size:18px;">👋</div>
+                  <div style="display:flex; flex-direction:column; text-align:left;">
+                    <span style="font-size:11px; font-weight:700; color:#EEEEF5;">Arjun (You)</span>
+                    <span style="font-size:8px; color:#1DD1A1; font-weight:700;">Safe Zone ✓</span>
+                  </div>
+                </div>
+                <div style="font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; color:#EEEEF5; margin-left:auto;">83%</div>
+              </div>
+
+              <!-- Member 2 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#1C1B2E; border:1px solid #2E2D47; border-radius:12px; padding:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="font-size:18px;">🦁</div>
+                  <div style="display:flex; flex-direction:column; text-align:left;">
+                    <span style="font-size:11px; font-weight:700; color:#EEEEF5;">Kabir</span>
+                    <span style="font-size:8px; color:#1DD1A1; font-weight:700;">Safe Zone ✓</span>
+                  </div>
+                </div>
+                <div style="font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; color:#EEEEF5; margin-left:auto;">78%</div>
+              </div>
+
+              <!-- Member 3 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#1C1B2E; border:1px solid #2E2D47; border-radius:12px; padding:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="font-size:18px;">🦄</div>
+                  <div style="display:flex; flex-direction:column; text-align:left;">
+                    <span style="font-size:11px; font-weight:700; color:#EEEEF5;">Priya</span>
+                    <span style="font-size:8px; color:#1DD1A1; font-weight:700;">Safe Zone ✓</span>
+                  </div>
+                </div>
+                <div style="font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; color:#EEEEF5; margin-left:auto;">88%</div>
+              </div>
+
+              <!-- Member 4 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#1C1B2E; border:1px solid #2E2D47; border-radius:12px; padding:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="font-size:18px;">🐼</div>
+                  <div style="display:flex; flex-direction:column; text-align:left;">
+                    <span style="font-size:11px; font-weight:700; color:#EEEEF5;">Rohan</span>
+                    <span style="font-size:8px; color:#FF6B6B; font-weight:700;">Critical Zone ✗</span>
+                  </div>
+                </div>
+                <div style="font-family:'Space Grotesk', sans-serif; font-size:12px; font-weight:700; color:#FF6B6B; margin-left:auto;">74%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Bottom Nav Bar -->
+          <nav class="app-bottom-nav">
+            <button class="app-nav-item active" onclick="switchSimulatorTab('home', this)">
+              <span class="material-symbols-outlined app-nav-icon">home</span>
+              <span class="app-nav-label">Home</span>
+            </button>
+            <button class="app-nav-item" onclick="switchSimulatorTab('dashboard', this)">
+              <span class="material-symbols-outlined app-nav-icon">bar_chart</span>
+              <span class="app-nav-label">Dashboard</span>
+            </button>
+            <button class="app-nav-item" onclick="switchSimulatorTab('calendar', this)">
+              <span class="material-symbols-outlined app-nav-icon">calendar_month</span>
+              <span class="app-nav-label">Calendar</span>
+            </button>
+            <button class="app-nav-item" onclick="switchSimulatorTab('squad', this)">
+              <span class="material-symbols-outlined app-nav-icon">group</span>
+              <span class="app-nav-label">Squads</span>
+            </button>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section">
+    <div class="section-header">
+      <span class="section-tag">Core Capabilities</span>
+      <h2 class="section-title">Everything you need to cruise your semester.</h2>
+      <p class="section-desc">AttendEase focuses strictly on what matters to college students. No unnecessary feeds, no metrics bloating, just pure calculations.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <span class="material-symbols-outlined">map</span>
+        </div>
+        <h3>Auto-Marking Zones</h3>
+        <p>Walk to your classroom and mark the coordinate once. When your class starts, background location matches the schedule and marks you present automatically. Coordinates are stored locally and never leave your device.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <span class="material-symbols-outlined">calculate</span>
+        </div>
+        <h3>Live Bunk Budgets</h3>
+        <p>Real-time calculation tells you exactly how many lectures you can bunk without dropping below college thresholds. Automatically alerts you when a subject enters critical warning zones.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <span class="material-symbols-outlined">group</span>
+        </div>
+        <h3>Social Squads</h3>
+        <p>Form digital squads with up to 8 friends (up to 50 on Pro). Sync schedules, share status, and plan joint skips together. Your actual location stays private, only attendance percentage is synced.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulator Features Linker Section -->
+  <section id="demo" class="demo-showcase-section">
+    <div class="demo-container">
+      <div class="demo-info">
+        <span class="section-tag">Live Demonstration</span>
+        <h2 class="section-title">Test Drive the App Interface Right Now.</h2>
+        <p class="section-desc">Click through the simulator tabs to see how AttendEase organizes your daily timetable, tracks per-subject statistics, charts grades, and plans your skip schedule.</p>
+        
+        <div class="demo-tabs">
+          <!-- Button 1 -->
+          <button class="demo-tab-btn active" onclick="triggerSimulatorTab('home')">
+            <div class="demo-tab-icon"><span class="material-symbols-outlined">home</span></div>
+            <div class="demo-tab-text">
+              <span class="demo-tab-title">Daily Timetable</span>
+              <span class="demo-tab-desc">Log attendance in 1 click. Tap buttons in the phone simulator above!</span>
+            </div>
+          </button>
+
+          <!-- Button 2 -->
+          <button class="demo-tab-btn" onclick="triggerSimulatorTab('dashboard')">
+            <div class="demo-tab-icon"><span class="material-symbols-outlined">bar_chart</span></div>
+            <div class="demo-tab-text">
+              <span class="demo-tab-title">Subject Dashboard</span>
+              <span class="demo-tab-desc">Check current percentages, safety status, and margins.</span>
+            </div>
+          </button>
+
+          <!-- Button 3 -->
+          <button class="demo-tab-btn" onclick="triggerSimulatorTab('squad')">
+            <div class="demo-tab-icon"><span class="material-symbols-outlined">group</span></div>
+            <div class="demo-tab-text">
+              <span class="demo-tab-title">Social Squads</span>
+              <span class="demo-tab-desc">Sync attendance rates with your classmates and coordinate skips.</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="demo-selector">
+        <div style="text-align: center; color: var(--color-text-secondary); max-width: 320px;">
+          <span class="material-symbols-outlined" style="font-size: 64px; color: var(--color-primary); margin-bottom: 24px; animation: bounce 2s infinite;">arrow_upward</span>
+          <h3>Try interacting with the phone frame on the top-right!</h3>
+          <p style="font-size: 14px; margin-top: 12px;">The simulator updates values dynamically. Try slide controls, marking P/L/A logs, or switching tabs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="section-header">
+      <span class="section-tag">Answering Doubts</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>Does AttendEase send my location coordinates to servers?</h4>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">
+          <p>No. Your privacy is our priority. Coordinates marked for classrooms are kept on-device inside a secure SQLite container. Location queries are completed strictly in local background tasks. Only attendance totals/profiles are shared with your squad if cloud backup is explicitly signed into.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>How does the Bunk Budget system calculate safety?</h4>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">
+          <p>The system utilizes variables: your current present/total lectures, college minimum criteria (default 75%), and remaining semester calendar weeks. It maps out mathematical projection models to display the maximum potential bunks allowed without dropping below criteria threshold.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h4>Can I change the minimum required attendance criteria?</h4>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. During the onboarding step, or at any point in Settings, you can configure your college's criteria using a stepper (ranges from 65% to 85%). The budget metrics update immediately across all panels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo-link">
+          <span class="logo-text">AttendEase</span>
+        </a>
+        <p>An offline-first attendance tracker designed for college students. Track attendance, plan bunks, and sync with friends.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">Interactive Simulator</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Contact</h5>
+        <div style="font-size: 14px; color: var(--color-text-secondary);">
+          <a href="mailto:waytokairo@gmail.com" style="color: var(--color-primary);">waytokairo@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 AttendEase by Harda Josh. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    // Check local preferences
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-theme');
+      themeIcon.textContent = 'dark_mode';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      if (document.body.classList.contains('light-theme')) {
+        themeIcon.textContent = 'dark_mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        themeIcon.textContent = 'light_mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+
+    // Simulator Tab Switcher
+    function switchSimulatorTab(tabId, btn) {
+      // Toggle nav items active class
+      const navItems = document.querySelectorAll('.app-nav-item');
+      navItems.forEach(item => item.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show targeted screen
+      const screens = document.querySelectorAll('.app-content-area');
+      screens.forEach(screen => screen.classList.remove('active'));
+      
+      const targetScreen = document.getElementById('app' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+      if (targetScreen) targetScreen.classList.add('active');
+
+      // Update sync demo tab selections in hero description section
+      const demoBtns = document.querySelectorAll('.demo-tab-btn');
+      demoBtns.forEach(demoBtn => {
+        demoBtn.classList.remove('active');
+        if (demoBtn.getAttribute('onclick').includes(tabId)) {
+          demoBtn.classList.add('active');
+        }
+      });
+    }
+
+    function triggerSimulatorTab(tabId) {
+      const navBtn = Array.from(document.querySelectorAll('.app-nav-item')).find(item => 
+        item.getAttribute('onclick').includes(tabId)
+      );
+      if (navBtn) navBtn.click();
+    }
+
+    // Interactive Mark Attendance function
+    let completedClasses = 47;
+    let bunkedClasses = 8;
+    
+    function markAttendance(btn, status, value) {
+      // Remove active sibling classes
+      const parent = btn.parentElement;
+      const buttons = parent.querySelectorAll('.app-mark-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      
+      // Make clicked button active
+      btn.classList.add('active');
+
+      // Adjust mock stats and display toast
+      const toast = document.getElementById('appToast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+
+      // Dynamically update the overall metrics based on status
+      const overallPct = document.getElementById('overallPct');
+      if (status === 'present') {
+        completedClasses++;
+        overallPct.textContent = '84%';
+      } else if (status === 'absent') {
+        bunkedClasses++;
+        overallPct.textContent = '81%';
+      } else {
+        completedClasses++;
+        overallPct.textContent = '83%';
+      }
+    }
+
+
+
+    // FAQ Accordion Toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const q = item.querySelector('.faq-question');
+      q.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        faqItems.forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Auto greetings transition based on local time
+    const greetingText = document.getElementById('appGreeting');
+    const hours = new Date().getHours();
+    if (hours >= 4 && hours < 12) greetingText.textContent = "Good morning,";
+    else if (hours >= 12 && hours < 17) greetingText.textContent = "Good afternoon,";
+    else if (hours >= 17 && hours < 22) greetingText.textContent = "Good evening,";
+    else greetingText.textContent = "Good night,";
+  </script>
+</body>
+</html>
