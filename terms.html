@@ -209,5 +209,88 @@
       <span>&copy; 2026 AttendEase by Harda Josh. All rights reserved.</span>
     </div>
   </footer>
+  <script>
+    // High energy particle burst popper effect
+    function createPop(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX || (rect.left + rect.width / 2);
+      const y = e.clientY || (rect.top + rect.height / 2);
+      
+      const colors = ['#FFD21C', '#E11D2E', '#00C389', '#2563EB', '#FF8A00'];
+      const emojis = ['🔥', '✨', '⚡️', '🎉', '💡', '🎓', '🎯', '🚀', '💯'];
+      
+      for (let i = 0; i < 18; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'pop-particle';
+        const isEmoji = Math.random() > 0.5;
+        if (isEmoji) {
+          particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          particle.style.fontSize = Math.random() * 14 + 12 + 'px';
+        } else {
+          particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+          particle.style.borderRadius = '50%';
+          const size = Math.random() * 10 + 6;
+          particle.style.width = size + 'px';
+          particle.style.height = size + 'px';
+          particle.style.border = '2px solid #1E1200';
+        }
+        
+        particle.style.position = 'fixed';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '99999';
+        
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 180 + 100;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity - 40;
+        
+        document.body.appendChild(particle);
+        
+        let opacity = 1;
+        let curX = x;
+        let curY = y;
+        const grav = 0.6;
+        let curVy = vy;
+        
+        const startTime = performance.now();
+        function update(time) {
+          const elapsed = (time - startTime) / 1000;
+          if (elapsed > 0.7) {
+            particle.remove();
+            return;
+          }
+          curX += vx * 0.016;
+          curVy += grav;
+          curY += curVy * 0.016;
+          opacity = 1 - elapsed / 0.7;
+          
+          particle.style.transform = `translate(${curX - x}px, ${curY - y}px) scale(${opacity})`;
+          particle.style.opacity = opacity;
+          
+          requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+    }
+
+    // Attach particle burst listeners to all interactive items
+    document.addEventListener('DOMContentLoaded', () => {
+      // Sync Light/Dark mode
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-theme');
+      }
+
+      const interactiveElements = document.querySelectorAll(
+        '.btn-primary, .btn-outline, .store-badge, a, button'
+      );
+      interactiveElements.forEach(el => {
+        el.addEventListener('click', (e) => {
+          createPop(e);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
